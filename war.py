@@ -63,7 +63,7 @@ def splitDeck(deck, p1Deck, p2Deck):
     p2Deck = deck[mid:]
     return p1Deck, p2Deck
 
-# Transfers the amount of cards specified by num from the reserve deck to the war deck,
+# Transfers the amount of cards specified by num from the reserve deck to the wardeck,
 # returns false if the reserve deck doesn't have enough cards to transfer.
 # Also returns the modified decks    
 def playCards(deck, warDeck, num) -> bool:
@@ -71,10 +71,9 @@ def playCards(deck, warDeck, num) -> bool:
     # check to make sure there's enough cards to draw, if not report failure
     if len(deck) < num:
         return False, deck, warDeck
+    
     # draw cards
     for i in range(num):
-        if i > num-1:
-            break
         warDeck.insert(0, deck.pop(0)) # removes the top card from the reserve deck and adds it to the top of the war deck
    
     return True, deck, warDeck 
@@ -92,7 +91,7 @@ def getCards(deck, p1WarDeck, p2WarDeck):
     tempDeck = []
     return numWon, deck, p1WarDeck, p2WarDeck
 
-#Simulates the fight between the two players. Returns an int to indicate which player won, or a draw
+# Simulates the fight between the two players. Returns an int to indicate which player won, or a draw
 def battle(p1WarDeck, p2WarDeck) -> int:
 
     if len(p1WarDeck) < 1 or len(p2WarDeck) < 1:
@@ -132,12 +131,12 @@ def play():
         p2HasCards, p2Deck, p2WarDeck = playCards(p2Deck, p2WarDeck, 1)
         victor = 0
 
-        # "War" gameplay loop, loops when players draw 
+        # "War" loop, keeps looping in same round in the event of a draw condition
         while victor == 0 and p1HasCards and p2HasCards:
             victor = battle(p1WarDeck, p2WarDeck)
             if victor == 0:
-                p1HasCards, p1Deck, p1WarDeck = playCards(p1Deck, p1WarDeck, 3)
-                p2HasCards, p2Deck, p2WarDeck = playCards(p2Deck, p2WarDeck, 3) 
+                p1HasCards, p1Deck, p1WarDeck = playCards(p1Deck, p1WarDeck, 4)
+                p2HasCards, p2Deck, p2WarDeck = playCards(p2Deck, p2WarDeck, 4) 
             elif victor == 1:
                 numWon, p1Deck, p1WarDeck, p2WarDeck = getCards(p1Deck, p1WarDeck, p2WarDeck)
                 print("Player 1 won", numWon, "cards!\n")
@@ -147,8 +146,7 @@ def play():
             print("Player 1 has", len(p1Deck), "cards remaining.")
             print("Player 2 has", len(p2Deck), "cards remaining.")
             cardCount += numWon
-        turnCount += 1
-            
+        turnCount += 1       
 
     if p1HasCards == False:
         print("Player 1 is out of cards. Player 2 wins!")
