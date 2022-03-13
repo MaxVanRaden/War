@@ -2,6 +2,7 @@ import unittest
 import war
 
 class Tests(unittest.TestCase):
+
     def testGenDeck(self): # test non-empty list passed in 
         testList = [0, 1]
         self.assertRaises(Exception, war.genDeck, testList )
@@ -9,6 +10,7 @@ class Tests(unittest.TestCase):
         testDeck = []
         war.genDeck(testDeck)
         self.assertEqual(len(testDeck), 52)
+    
     def testSplitDeck(self): # test empty deck
         self.assertRaises(Exception, war.splitDeck)
     def testSplitDeck2(self): # test odd deck
@@ -18,7 +20,19 @@ class Tests(unittest.TestCase):
         testDeck = [1,2]
         testDeckP1 = [1]
         testDeckP2 = []
-        self.assertRaises(Exception, war.splitDeck)
+        self.assertRaises(Exception, war.splitDeck, testDeck, testDeckP1, testDeckP2)
+    
+    def testPlayCards(self):
+        self.assertRaises(Exception, war.playCards, deck=[], warDeck=[], num=0)
+    
+    def testGetCards(self): 
+        self.assertRaises(Exception, war.getCards)
+    
+    def testBattle(self):
+        self.assertRaises(Exception, war.battle)
+
+    
+
     
     
 

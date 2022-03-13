@@ -68,6 +68,8 @@ def splitDeck(deck, p1Deck, p2Deck):
 # Also returns the modified decks    
 def playCards(deck, warDeck, num) -> bool:
     
+    if num < 1:
+        raise Exception("Number of cards to remove invalid")
     # check to make sure there's enough cards to draw, if not report failure
     if len(deck) < num:
         return False, deck, warDeck
@@ -81,6 +83,9 @@ def playCards(deck, warDeck, num) -> bool:
 # Shuffles and then adds the cards contained in both wardecks to the bottom of the winning player's
 # reserve deck. Also empties the wardecks. Returns the number of cards won by the winning player and the modified decks
 def getCards(deck, p1WarDeck, p2WarDeck):
+
+    if len(p1WarDeck) < 1 or len(p2WarDeck) < 1:
+        raise Exception("One or both wardecks empty") 
 
     tempDeck = p1WarDeck + p2WarDeck # combine wardecks to shuffle once
     numWon = len(tempDeck)
@@ -109,7 +114,7 @@ def battle(p1WarDeck, p2WarDeck) -> int:
         return 0 # the battle was a draw
 
 # Main gameplay function. Initializes the variables and runs the game at full speed
-def play():
+def main():
 
     deck = [] # initial, full deck of cards
     p1Deck = [] # Player 1's primary("reserve") deck - if this is empty, player 1 loses
@@ -157,6 +162,6 @@ def play():
     print("This match took", turnCount, "turns to complete, and", cardCount, "cards were exchanged.")
 
 if __name__ == "__main__":
-    play()
+    main()
 
     
