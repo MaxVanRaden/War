@@ -16,6 +16,9 @@ class card:
 # Generates a standard deck of 52 playing cards 
 def genDeck(deck):
 
+    if len(deck) != 0:
+        raise Exception("List argument is not empty")
+    
     # Outer loop handles each suit of the deck
     for i in range(4):
         currentSuit = ""
@@ -100,8 +103,8 @@ def battle(p1WarDeck, p2WarDeck) -> int:
 
     if len(p1WarDeck) < 1 or len(p2WarDeck) < 1:
         raise Exception("One or both battling wardecks empty")
-    print("Player 1 plays the", p1WarDeck[0].name, "of", p1WarDeck[0].suit,"!" )
-    print("Player 2 plays the", p2WarDeck[0].name, "of", p2WarDeck[0].suit,"!" )
+    print("Player 1 plays the ", p1WarDeck[0].name, " of ", p1WarDeck[0].suit,"!", sep='' )
+    print("Player 2 plays the ", p2WarDeck[0].name, " of ", p2WarDeck[0].suit,"!", sep='' )
     if p1WarDeck[0].value > p2WarDeck[0].value: 
         print("Player 1 wins the battle!")
         return 1 # return 1, indicating player 1 won the battle
@@ -143,12 +146,12 @@ def play():
                 p2HasCards, p2Deck, p2WarDeck = playCards(p2Deck, p2WarDeck, 3) 
             elif victor == 1:
                 numWon, p1Deck, p1WarDeck, p2WarDeck = getCards(p1Deck, p1WarDeck, p2WarDeck)
-                print("Player 1 won", numWon, "cards!")
+                print("Player 1 won", numWon, "cards!\n")
             elif victor == 2: 
                 numWon, p2Deck, p1WarDeck, p2WarDeck = getCards(p2Deck, p1WarDeck, p2WarDeck)
-                print("Player 2 won", numWon, "cards!")
+                print("Player 2 won", numWon, "cards!\n")
             print("Player 1 has", len(p1Deck), "cards remaining.")
-            print("Player 2 has", len(p2Deck), "cards remaining.\n")
+            print("Player 2 has", len(p2Deck), "cards remaining.")
             cardCount += numWon
         turnCount += 1
             
@@ -161,6 +164,7 @@ def play():
         raise Exception("Both players still have cards at end of play function")
     print("This match took", turnCount, "turns to complete, and", cardCount, "cards were exchanged.")
 
+if __name__ == "__main__":
+    play()
 
-
-play()
+    
