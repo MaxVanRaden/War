@@ -30,13 +30,9 @@ def genDeck(deck):
             currentSuit = "Spades"
         elif i == 3: 
             currentSuit = "Clubs"
-        else:
-            raise Exception('Unexpected range value')
         
         # Handles the numerically named cards
-        for j in range(9):
-            if j < 0 or j > 8:
-                raise Exception('Unexpected range value') 
+        for j in range(9): 
             deck.append(card(j+2, "{}".format(j+2), currentSuit))
         
         # Handles the face cards
@@ -49,8 +45,6 @@ def genDeck(deck):
                 deck.append(card(13, "King", currentSuit))
             elif j == 3:
                 deck.append(card(14, "Ace", currentSuit))
-            else: 
-                raise Exception('Unexpected range value')
     return deck
 
 # Splits a deck of cards into two equally sized shuffled decks. 
