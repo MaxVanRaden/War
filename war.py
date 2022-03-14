@@ -137,7 +137,7 @@ def argHandler(vFlag: bool, sFlag: bool) -> Tuple[bool, bool]:
 def help():
 
     print(
-        """
+    """
     This program is a command line implementation of the card game War. 
     It has no user interaction while running, but accepts several command line arguments.
 
@@ -160,7 +160,7 @@ def main():
     vFlag, sFlag = argHandler(vFlag, sFlag)
 
     deck = []  # initial, full deck of cards
-    p1Deck = []  # Player 1's primary("reserve") deck - if this is empty, player 1 loses
+    p1Deck = []  # Player 1's primary ("reserve") deck - if this is empty, player 1 loses
     p2Deck = []
     p1WarDeck = []  # Player 1's war deck - represents cards in play
     p2WarDeck = []
