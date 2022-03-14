@@ -4,7 +4,7 @@
 from math import floor
 from random import shuffle
 from typing import List, Tuple
-from time import sleep
+from time import sleep, time
 from sys import argv, exit
 
 # Class for representing card information
@@ -72,21 +72,19 @@ def splitDeck(
 # Transfers the amount of cards specified by num from the reserve deck to the wardeck,
 # returns false if the reserve deck doesn't have enough cards to transfer.
 # Also returns the modified decks.
+# "warDeck" refers to the cards on the table for each player
 def playCards(
     deck: List[Card], warDeck: List[Card], num: int
 ) -> Tuple[bool, List[Card], List[Card]]:
 
     if num < 1:
         raise Exception("Number of cards to remove invalid")
-    # check to make sure there's enough cards to draw, if not report failure
     if len(deck) < num:
         return False, deck, warDeck
 
     # draw cards
     for i in range(num):
-        warDeck.insert(
-            0, deck.pop(0)
-        )  # removes the top card from the reserve deck and adds it to the top of the war deck
+        warDeck.insert(0, deck.pop(0))
 
     return True, deck, warDeck
 
@@ -120,7 +118,6 @@ def battle(p1WarDeck: List[Card], p2WarDeck: List[Card]) -> int:
     elif p1WarDeck[0].value < p2WarDeck[0].value:
         return 2  # player 2 won the battle
     else:
-
         return 0  # the battle was a draw
 
 
@@ -137,11 +134,13 @@ def argHandler(vFlag: bool, sFlag: bool) -> Tuple[bool, bool]:
                 sFlag = True
             elif argv[i] == "-h" or argv[i] == "--help":
                 help()
+
     return vFlag, sFlag
 
 
 # Displays the help page and exits the program
 def help():
+
     print(
         """
     This program is a command line implementation of the card game War. 
@@ -161,7 +160,6 @@ def help():
 # Main gameplay function. Initializes the variables and runs the game
 def main():
 
-    # command line argument handling
     vFlag = False
     sFlag = False
     vFlag, sFlag = argHandler(vFlag, sFlag)
@@ -173,14 +171,15 @@ def main():
     p2WarDeck = []
     p1HasCards = True
     p2HasCards = True
+    numWon = 0  # number of cards won by a player in a hand
     turnCount = 0
     cardCount = 0  # tracks the number of cards that have been swapped between players during the game
 
-    # initialize the decks
+    # initialize the player decks
     deck = genDeck(deck)
     p1Deck, p2Deck = splitDeck(deck, p1Deck, p2Deck)
 
-    # Main gameplay loop
+    # Main gameplay loop, each loop here counts as a round of gameplay
     while p1HasCards and p2HasCards:
         p1HasCards, p1Deck, p1WarDeck = playCards(p1Deck, p1WarDeck, 1)
         p2HasCards, p2Deck, p2WarDeck = playCards(p2Deck, p2WarDeck, 1)
@@ -221,13 +220,18 @@ def main():
         turnCount += 1
 
     if p1HasCards == False:
-        print("Player 1 is out of cards. Player 2 wins!")
+        print("\nPlayer 1 is out of cards. Player 2 wins!")
     elif p2HasCards == False:
-        print("Player 2 is out of cards. Player 1 wins!")
+        print("\nPlayer 2 is out of cards. Player 1 wins!")
     else:
         raise Exception("Both players still have cards at end of play function")
+
     print(
         f"This match took {turnCount} turns to complete, and {cardCount} cards were exchanged."
+    )
+    approxRealTime = round(turnCount * 10 / 60 / 60, 2)
+    print(
+        f"If this game had been played by hand, it would have taken approximately {approxRealTime} hours.\n"
     )
 
 
