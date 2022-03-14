@@ -147,8 +147,8 @@ def help():
     This program is a command line implementation of the card game War. 
     It has no user interaction while running, but accepts several command line arguments.
 
-    Options:     --verbose (-v)     Prints each round of combat instead of just the result  
-                 --slow (-s)        Adds time between each round to make the game observable
+    Options:     --verbose (-v)     Prints output for each round of combat instead of just the result of the game 
+                 --slow (-s)        Adds time between each round to make the game's progress observable
                  --help (-h)        Displays this menu and exits
     
     Options can be chained in any order.
