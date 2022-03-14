@@ -5,7 +5,7 @@ from math import floor
 from random import shuffle
 from typing import List, Tuple
 from time import sleep
-import sys
+from sys import argv, exit
 
 # Class for representing card information
 class Card:
@@ -14,8 +14,9 @@ class Card:
         self.name = name
         self.suit = suit
 
+
 # Generates a standard deck of 52 playing cards
-def genDeck(deck) -> List[Card]:
+def genDeck(deck: List[Card]) -> List[Card]:
 
     if len(deck) != 0:
         raise Exception("List argument is not empty")
@@ -50,9 +51,9 @@ def genDeck(deck) -> List[Card]:
 
 
 # Splits a deck of cards into two equally sized shuffled decks.
-# Deck should be of type List[card] with an even number of cards, p1 and p2deck should
-# be empty when passed in
-def splitDeck(deck, p1Deck, p2Deck) -> Tuple[List[Card], List[Card]]:
+def splitDeck(
+    deck: List[Card], p1Deck: List[Card], p2Deck: List[Card]
+) -> Tuple[List[Card], List[Card]]:
 
     if len(deck) % 2 != 0 and len(deck) != 0:
         raise Exception(
@@ -70,8 +71,10 @@ def splitDeck(deck, p1Deck, p2Deck) -> Tuple[List[Card], List[Card]]:
 
 # Transfers the amount of cards specified by num from the reserve deck to the wardeck,
 # returns false if the reserve deck doesn't have enough cards to transfer.
-# Also returns the modified decks
-def playCards(deck, warDeck, num) -> Tuple[bool, List[Card], List[Card]]:
+# Also returns the modified decks.
+def playCards(
+    deck: List[Card], warDeck: List[Card], num: int
+) -> Tuple[bool, List[Card], List[Card]]:
 
     if num < 1:
         raise Exception("Number of cards to remove invalid")
@@ -90,7 +93,9 @@ def playCards(deck, warDeck, num) -> Tuple[bool, List[Card], List[Card]]:
 
 # Shuffles and then adds the cards contained in both wardecks to the bottom of the winning player's
 # reserve deck. Also empties the wardecks. Returns the number of cards won by the winning player and the modified decks
-def getCards(deck, p1WarDeck, p2WarDeck) -> Tuple[int, List[Card], List[Card], List[Card]]:
+def getCards(
+    deck: List[Card], p1WarDeck: List[Card], p2WarDeck: List[Card]
+) -> Tuple[int, List[Card], List[Card], List[Card]]:
 
     if len(p1WarDeck) < 1 or len(p2WarDeck) < 1:
         raise Exception("One or both wardecks empty")
@@ -106,7 +111,7 @@ def getCards(deck, p1WarDeck, p2WarDeck) -> Tuple[int, List[Card], List[Card], L
 
 
 # Simulates the fight between the two players. Returns an int to indicate which player won, or a draw
-def battle(p1WarDeck, p2WarDeck) -> int:
+def battle(p1WarDeck: List[Card], p2WarDeck: List[Card]) -> int:
 
     if len(p1WarDeck) < 1 or len(p2WarDeck) < 1:
         raise Exception("One or both battling wardecks empty")
@@ -115,44 +120,48 @@ def battle(p1WarDeck, p2WarDeck) -> int:
     elif p1WarDeck[0].value < p2WarDeck[0].value:
         return 2  # player 2 won the battle
     else:
-        
+
         return 0  # the battle was a draw
 
-# Parses command line arguments and modifies the program accordingly 
-def argHandler(vFlag, sFlag) -> Tuple[bool, bool]:
-    
-    if len(sys.argv) == 0:
+
+# Parses command line arguments and modifies the program accordingly
+def argHandler(vFlag: bool, sFlag: bool) -> Tuple[bool, bool]:
+
+    if len(argv) == 0:
         return vFlag, sFlag
     else:
-        for i in range(1, len(sys.argv)):
-            if sys.argv[i] == "--v" or sys.argv[i] == "--verbose":
+        for i in range(1, len(argv)):
+            if argv[i] == "-v" or argv[i] == "--verbose":
                 vFlag = True
-            elif sys.argv[i] == "--s" or sys.argv[i] == "--slow":
+            elif argv[i] == "-s" or argv[i] == "--slow":
                 sFlag = True
-            elif sys.argv[i] == "--h" or sys.argv[i] == "--help":
+            elif argv[i] == "-h" or argv[i] == "--help":
                 help()
     return vFlag, sFlag
 
+
 # Displays the help page and exits the program
 def help():
-    print("""
+    print(
+        """
     This program is a command line implementation of the card game War. 
     It has no user interaction while running, but accepts several command line arguments.
 
-    Options:     --verbose (--v)     Prints each round of combat instead of just the result  
-                 --slow (--s)        Adds time between each round to make the game observable
-                 --help (--h)        Displays this menu and exits
+    Options:     --verbose (-v)     Prints each round of combat instead of just the result  
+                 --slow (-s)        Adds time between each round to make the game observable
+                 --help (-h)        Displays this menu and exits
     
     Options can be chained in any order.
-    Example usage: >>python3 war.py --v --s
-    """)
-    sys.exit()
+    Example usage: >>python -m war -v -s
+    """
+    )
+    exit()
 
 
-# Main gameplay function. Initializes the variables and runs the game at full speed
+# Main gameplay function. Initializes the variables and runs the game
 def main():
-    
-    #command line argument handling 
+
+    # command line argument handling
     vFlag = False
     sFlag = False
     vFlag, sFlag = argHandler(vFlag, sFlag)
@@ -180,7 +189,7 @@ def main():
         # "War" loop, keeps looping in same round in the event of a draw condition
         while victor == 0 and p1HasCards and p2HasCards:
             victor = battle(p1WarDeck, p2WarDeck)
-            if(vFlag): 
+            if vFlag:
                 print(f"Player 1 plays the {p1WarDeck[0].name} of {p1WarDeck[0].suit}!")
                 print(f"Player 2 plays the {p2WarDeck[0].name} of {p2WarDeck[0].suit}!")
 
@@ -199,7 +208,7 @@ def main():
                 numWon, p2Deck, p1WarDeck, p2WarDeck = getCards(
                     p2Deck, p1WarDeck, p2WarDeck
                 )
-                
+
                 if vFlag:
                     print(f"Player 2 wins the battle! They win {numWon} cards!\n")
                 if sFlag:
@@ -207,7 +216,7 @@ def main():
             if vFlag:
                 print(f"Player 1 has {len(p1Deck)} cards remaining.")
                 print(f"Player 2 has {len(p2Deck)} cards remaining.")
-            
+
             cardCount += numWon
         turnCount += 1
 
@@ -217,7 +226,9 @@ def main():
         print("Player 2 is out of cards. Player 1 wins!")
     else:
         raise Exception("Both players still have cards at end of play function")
-    print(f"This match took {turnCount} turns to complete, and {cardCount} cards were exchanged.")
+    print(
+        f"This match took {turnCount} turns to complete, and {cardCount} cards were exchanged."
+    )
 
 
 if __name__ == "__main__":
