@@ -4,7 +4,7 @@
 from math import floor
 from random import shuffle
 from typing import List, Tuple
-from time import sleep, time
+from time import sleep
 from sys import argv, exit
 
 # Class for representing card information
