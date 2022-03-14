@@ -13,8 +13,9 @@ When designing this implementation of War, I based my design choices off of the 
 However, per Wikipedia, some parts of the War ruleset are not agreed upon. Specific rules that I made an implementation decision on can be found under 'Game Rules' in the Assumptions section.
 
 ## Instructions
-1. Download the project.  
-2. Run `python -m war` from within the project directory.
+1. Download the project.
+2. If necessary, install Python.  
+3. Run `python -m war` from within the project directory.
 
 This program has no user interaction while running, but accepts several command line arguments.
 
