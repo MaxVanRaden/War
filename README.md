@@ -1,8 +1,10 @@
 # War
-## Introduction
-This is an implementation of the card game War written in Python as part of a job interview. 
 
-As War is a game devoid of player input or choice, there is no user interaction once the the program begins running. However, it does support several command line arguments discussed later.
+## Introduction
+
+This is an implementation of the card game War written in Python. 
+
+As War is a game devoid of player input or choice, there is no user interaction once the the program begins running - it plays itself. However, it does support several command line arguments discussed later. Once the game is complete, the game displays the winner, the number of rounds taken to reach the end, and the number of cards won in total before the game ended. 
 
 When designing this implementation of War, I based my design choices off of the rules as discussed on wikipedia:
 
@@ -26,23 +28,21 @@ Example usage: `python -m war -v -s`
  
 ## Assumptions
 
-
 **The following are a list of assumptions that I made during development:**
 
 **General**
  
  - As the goal is to implement the card game war, only the cards in a deck of cards that are relevant to the game of war need to be implemented. Jokers, which are not used in War, will not be implemented. 
 
- - Since this is being done as a demonstration of coding ability, I will limit my use of libraries in favor of writing my own implementations.
+ - I will limit my use of libraries in favor of writing my own implementations.
  
- - War is an entirely deterministic game. There are no decisions that can be made within the rules of War that allow player choice or strategy to influence the results. Therefore, once the game has begun, user input is superfluous and unnecessary.
+ - War is an entirely deterministic game. There are no decisions that can be made within the rules of War that allow player choice or strategy to influence the results. Therefore, once the game has begun (ie, once the program has started), user input will not be possible. Control over how the game runs will be provided via command line arguments.
 
- - Because the assignment does not specify the need for any specific type of user interface, I will use a CLI for simplicity. 
+ - Because the project goals do not specify the need for any specific type of user interface, I will use a CLI for simplicity. 
   
  - Wikipedia’s description of the rules is complete and accurate, and an implementation of them constitutes a full, accurate implementation of the card game War.
  
  - The first index of the data structure used to represent each deck will be treated as the top card of the deck, and the last index will be treated as the bottom of the deck. i.e., deck[0] will be the top of the deck, and deck[len(deck)-1] will be the bottom of the deck.
- 
 
 **Game Rules**
 
