@@ -38,15 +38,10 @@ def genDeck(deck: List[Card]) -> List[Card]:
             deck.append(Card(j + 2, "{}".format(j + 2), currentSuit))
 
         # Handles the face cards
-        for j in range(4):
-            if j == 0:
-                deck.append(Card(11, "Jack", currentSuit))
-            elif j == 1:
-                deck.append(Card(12, "Queen", currentSuit))
-            elif j == 2:
-                deck.append(Card(13, "King", currentSuit))
-            elif j == 3:
-                deck.append(Card(14, "Ace", currentSuit))
+        deck.append(Card(11, "Jack", currentSuit))
+        deck.append(Card(12, "Queen", currentSuit))
+        deck.append(Card(13, "King", currentSuit))
+        deck.append(Card(14, "Ace", currentSuit))
     return deck
 
 
