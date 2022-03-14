@@ -22,7 +22,7 @@ This program has no user interaction while running, but accepts several command 
     Options:    
                  --verbose (-v)     Prints output for each round of combat instead of just the result of the game
                  --slow (-s)        Adds time between each round to make the game's progress observable
-                 --help (-h)        Displays this menu and exits
+                 --help (-h)        Displays the help menu and exits
     
 Options can be chained in any order.
 Example usage: `python -m war -v -s`
