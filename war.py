@@ -224,7 +224,7 @@ def main():
     print(
         f"This match took {turnCount} turns to complete, and {cardCount} cards were exchanged."
     )
-    approxRealTime = round(turnCount * 10 / 60 / 24, 2)
+    approxRealTime = round(turnCount * 10 / 60 / 60, 2)
     print(
         f"If this game had been played by hand, it would have taken approximately {approxRealTime} hours.\n"
     )
