@@ -22,7 +22,7 @@ This program has no user interaction while running, but accepts several command 
     Options:    
                  --verbose (-v)     Prints output for each round of combat instead of just the result of the game
                  --slow (-s)        Adds time between each round to make the game's progress observable
-                 --help (-h)        Displays this menu and exits
+                 --help (-h)        Displays the help menu and exits
     
 Options can be chained in any order.
 Example usage: `python -m war -v -s`
@@ -62,9 +62,6 @@ As described under 'Game Rules' in the Assumptions section, this corner case is 
 
 ## Further development possibilities 
 
-Were I to redo this project differently, I think the most interesting alternative route would be to revisit the assumptions I made regarding the game rules. As it stands, the deck is shuffled whenever
-cards are added to the bottom of a player's deck. However, some versions of the rules allow players to add the cards to the bottom of their deck in an order of their choice.
+Were I to redo this project differently, I think the most interesting alternative route would be to revisit the assumptions I made regarding the game rules. As it stands, cards are shuffled whenever they are added to the bottom of a player's deck. However, some versions of the rules allow players to add the cards to the bottom of their deck in an order of their choice.
 
-This seemingly small difference actually changes the game entirely, because it introduces player choice - and therefore strategy - into the game. By counting cards and ordering your cards intentionally, a player can influence the outcome of the game,
-which introduces two major changes from the version of War that I have implemented. One, it provides a reason to have player interaction with the program, and two, it means that designing a computer-controlled opponent is
-possible. These would both be interesting challenges to consider and implement, and would make the project substantially more complex. 
+This seemingly small difference actually changes the game entirely, because it introduces player choice - and therefore strategy - into the game. By counting cards and ordering their cards intentionally, a player can influence the outcome of the game, which introduces two major changes from the version of War that I have implemented. One, it provides a reason to have player interaction with the program, and two, it means that designing a computer-controlled opponent is possible. These would both be interesting challenges to consider and implement, and would make the project substantially more complex. 
