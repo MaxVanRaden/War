@@ -35,7 +35,7 @@ Example usage: `python -m war -v -s`
  
  - As the goal is to implement the card game war, only the cards in a deck of cards that are relevant to the game of war need to be implemented. Jokers, which are not used in War, will not be implemented. 
  
- - War is an entirely deterministic game. There are no decisions that can be made within the rules of War that allow player choice or strategy to influence the results. Therefore, once the game has begun (ie, once the program has started), user input will not be possible. Control over how the game runs will be provided via command line arguments.
+ - War is an entirely luck-based game. There are no decisions that can be made within the rules of War that allow player choice or strategy to influence the results. Therefore, once the game has begun (ie, once the program has started), user input will not be possible. Control over how the game runs will be provided via command line arguments.
 
  - War is a two-player card game.
  
